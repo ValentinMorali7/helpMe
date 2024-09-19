@@ -55,7 +55,7 @@ export const Navbar = () => {
                         startContent={<LogoutLogo />}
                         variant="flat"
                         onClick={() => {
-                            localStorage.removeItem('token')
+                            window.localStorage.removeItem('loggedUser')
                             window.location.reload()
                         }}
                     >
