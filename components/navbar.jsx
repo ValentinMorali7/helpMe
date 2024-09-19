@@ -1,3 +1,4 @@
+'use client'
 import {
     Navbar as NextUINavbar,
     NavbarContent,
@@ -53,6 +54,10 @@ export const Navbar = () => {
                         className="text-sm font-normal text-default-600 bg-default-100"
                         startContent={<LogoutLogo />}
                         variant="flat"
+                        onClick={() => {
+                            window.localStorage.removeItem('loggedUser')
+                            window.location.reload()
+                        }}
                     >
                         CERRAR SESIÓN
                     </Button>
