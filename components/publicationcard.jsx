@@ -18,10 +18,12 @@ const TruncatedText = ({ text, maxLength }) => {
 }
 
 export const PublicationCard = ({ prop }) => {
+    console.log('asDASDAS', prop)
+
     return (
         <div className="cardContainer">
-            <Card key={prop.index} shadow="sm">
-                <CardBody className="overflow-visible p-0">
+            <Card key={prop.id} shadow="sm">
+                <CardBody className="card">
                     <Image
                         className="w-full object-cover h-[140px]"
                         radius="lg"
@@ -29,14 +31,10 @@ export const PublicationCard = ({ prop }) => {
                         src="https://nextui-docs-v2.vercel.app/images/hero-card-complete.jpeg"
                         width="100%"
                     />
-
                     <CardFooter className="footer">
-                        <p>{prop.title}</p>
-                        <TruncatedText
-                            maxLength={100}
-                            text={prop.description}
-                        />
+                        <b>{prop.titulo}</b>
                         <Divider />
+                        <TruncatedText maxLength={100} text={prop.contenido} />
                     </CardFooter>
                 </CardBody>
                 <div className="buttonCard">
