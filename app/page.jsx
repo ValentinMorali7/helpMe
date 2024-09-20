@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react'
 import loginService from './services/login'
 import registerService from './services/register'
 import { Button } from '@nextui-org/button'
+import { useRouter } from 'next/navigation'
 
 export default function App() {
     const [email, setEmail] = useState('')
@@ -33,6 +34,8 @@ export default function App() {
     const [regContributorEmail, setRegContributorEmail] = useState('')
     const [regContributorPassword, setRegContributorPassword] = useState('')
 
+    const router = useRouter()
+
     useEffect(() => {
         const loggedUserJSON = window.localStorage.getItem('loggedUser')
         if (loggedUserJSON) {
@@ -50,16 +53,15 @@ export default function App() {
 
     const handleLogin = async (e) => {
         e.preventDefault()
-        console.log(user, password)
 
         try {
             const response = await loginService.login({
                 user: email,
                 password,
             })
-            console.log(response)
             window.localStorage.setItem('loggedUser', JSON.stringify(response))
             setUser(response)
+            router.push('/pages/home')
         } catch (error) {
             setError('Wrong credentials')
             setTimeout(() => {
