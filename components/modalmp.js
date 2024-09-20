@@ -8,7 +8,7 @@ import {
     Button,
 } from '@nextui-org/react'
 
-const ModalMP = ({ isOpen, onClose }) => {
+const ModalMP = ({ isOpen, onClose, body }) => {
     return (
         <Modal isOpen={isOpen} onClose={onClose}>
             <ModalContent>
@@ -17,16 +17,14 @@ const ModalMP = ({ isOpen, onClose }) => {
                         <ModalHeader className="flex flex-col gap-1">
                             DONAR
                         </ModalHeader>
-                        <ModalBody>
-                            <p>AQUI VAN METODOS DE PAGO</p>
-                        </ModalBody>
+                        <ModalBody>{body}</ModalBody>
                         <ModalFooter>
                             <Button
                                 color="danger"
                                 variant="light"
                                 onPress={onClose}
                             >
-                                Close
+                                Cerrar
                             </Button>
                         </ModalFooter>
                     </>

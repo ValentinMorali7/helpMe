@@ -26,7 +26,6 @@ const Page = ({ params: { id } }) => {
             const result = await publicationById(id)
 
             setData(result)
-            console.log('FALOPA', result)
         }
         fetchData()
     }, [])
@@ -67,7 +66,11 @@ const Page = ({ params: { id } }) => {
                 <Button color="primary" onClick={onOpen}>
                     DONAR !
                 </Button>
-                <ModalMP isOpen={isOpen} onClose={onClose} />
+                <ModalMP
+                    body={data?.descripcionDonacion}
+                    isOpen={isOpen}
+                    onClose={onClose}
+                />
             </CardFooter>
         </Card>
     )

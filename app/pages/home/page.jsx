@@ -13,7 +13,7 @@ const Home = () => {
     const [data, setData] = useState()
 
     const user = useContext(UserContext)
-    console.log(user)
+
     useEffect(() => {
         async function fetchData() {
             const result = await publications()
