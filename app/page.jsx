@@ -1,22 +1,13 @@
 'use client'
 import { Input } from '@nextui-org/input'
-<<<<<<< HEAD
-import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { Button } from '@nextui-org/react'
+import { useEffect, useState } from 'react'
 
 import loginService from './services/login'
 import registerService from './services/register'
 
 import { title, subtitle } from '@/components/primitives'
-=======
-import { useEffect, useState, useContext, createContext } from 'react'
-import loginService from './services/login'
-import registerService from './services/register'
-import { Button } from '@nextui-org/button'
-import { useRouter } from 'next/navigation'
-import { create } from 'domain'
->>>>>>> 565fc64b9e2ac99400b3213d00c9b7460b807820
 
 export default function App() {
     const [email, setEmail] = useState('')
