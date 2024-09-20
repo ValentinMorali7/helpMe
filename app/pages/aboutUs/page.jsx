@@ -2,7 +2,6 @@ import React from 'react'
 
 import './aboutUs.module.css'
 
-// asd
 const AboutUs = () => {
     return (
         <div className="container">

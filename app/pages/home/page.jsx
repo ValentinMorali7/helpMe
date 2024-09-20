@@ -16,7 +16,6 @@ const Home = () => {
             const result = await publication()
 
             setData(result)
-            console.log('asdasd', result)
         }
         fetchData()
     }, [])
