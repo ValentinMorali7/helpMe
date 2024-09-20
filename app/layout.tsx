@@ -31,9 +31,6 @@ export default function RootLayout({
 }: {
     children: React.ReactNode
 }) {
-    const handleLogout = () => {
-        window.localStorage.removeItem('token')
-    }
     return (
         <html suppressHydrationWarning lang="en">
             <head />
