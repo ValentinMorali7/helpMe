@@ -9,6 +9,7 @@ import {
     Divider,
 } from '@nextui-org/react'
 import '../components/cardstyles.css'
+import { useRouter } from 'next/navigation'
 
 const TruncatedText = ({ text, maxLength }) => {
     const truncated =
@@ -18,7 +19,10 @@ const TruncatedText = ({ text, maxLength }) => {
 }
 
 export const PublicationCard = ({ prop }) => {
-    console.log('asDASDAS', prop)
+    const router = useRouter()
+    const handleClick = () => {
+        router.push(`/publication/${prop?.id}`)
+    }
 
     return (
         <div className="cardContainer">
@@ -38,7 +42,9 @@ export const PublicationCard = ({ prop }) => {
                     </CardFooter>
                 </CardBody>
                 <div className="buttonCard">
-                    <Button color="primary">Ver Más</Button>
+                    <Button color="primary" onClick={handleClick}>
+                        Ver Más
+                    </Button>
                 </div>
             </Card>
         </div>
