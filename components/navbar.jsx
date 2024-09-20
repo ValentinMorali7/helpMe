@@ -8,15 +8,14 @@ import {
 import { Link } from '@nextui-org/link'
 import { Button } from '@nextui-org/button'
 import { useState } from 'react'
+import { useRouter } from 'next/navigation'
 
 import {
     AboutUsLogo,
     ContactUsLogo,
-    HomeLogo,
     ProfileLogo,
     LogoutLogo,
 } from '@/components/styledIcons'
-import { useRouter } from 'next/navigation'
 
 export const Navbar = () => {
     const [token, setToken] = useState('')
@@ -26,15 +25,21 @@ export const Navbar = () => {
         window.location.reload()
         router.push('pages/profile')
     }
+
     return (
-        <NextUINavbar isBordered maxWidth="xl" position="sticky">
+        <NextUINavbar
+            isBordered
+            className="bg-slate-200	"
+            color="primary"
+            maxWidth="xl"
+            position="sticky"
+        >
             <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
                 <NavbarBrand as="li" className="gap-3 max-w-fit">
                     <Link
                         className="flex justify-start items-center gap-1"
                         href="/pages/home"
                     >
-                        <HomeLogo />
                         <p className="font-bold text-inherit">HOME</p>
                     </Link>
                 </NavbarBrand>

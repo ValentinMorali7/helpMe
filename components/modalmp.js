@@ -15,10 +15,10 @@ const ModalMP = ({ isOpen, onClose }) => {
                 {(onClose) => (
                     <>
                         <ModalHeader className="flex flex-col gap-1">
-                            DONAR POR MERCADO PAGO
+                            DONAR
                         </ModalHeader>
                         <ModalBody>
-                            <p>QR</p>
+                            <p>AQUI VAN METODOS DE PAGO</p>
                         </ModalBody>
                         <ModalFooter>
                             <Button

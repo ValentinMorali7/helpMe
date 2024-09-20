@@ -41,10 +41,11 @@ const Page = ({ params: { id } }) => {
     const handleNavOrgClick = () => {
         router.push(`/organizacion/${data?.organizacionId}`)
     }
+
     return (
         <Card className="w-full h-full">
             <CardHeader className="flex justify-between flex-gap-3 p-5">
-                <a onClick={handleNavOrgClick} className='cursor-pointer'>
+                <a className="cursor-pointer" onClick={handleNavOrgClick}>
                     <Image
                         alt="nextui logo"
                         height={40}
@@ -53,7 +54,7 @@ const Page = ({ params: { id } }) => {
                         width={40}
                     />
                 </a>
-                
+
                 <b>{data?.titulo}</b>
                 <p>{fechaFormateada}</p>
             </CardHeader>
@@ -64,7 +65,7 @@ const Page = ({ params: { id } }) => {
             <Divider />
             <CardFooter>
                 <Button color="primary" onClick={onOpen}>
-                    DONAR por Mercado Pago !
+                    DONAR !
                 </Button>
                 <ModalMP isOpen={isOpen} onClose={onClose} />
             </CardFooter>
