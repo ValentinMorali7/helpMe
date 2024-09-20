@@ -1,11 +1,13 @@
 'use client'
-import { title, subtitle } from '@/components/primitives'
 import { Input } from '@nextui-org/input'
 import { useEffect, useState } from 'react'
+import { useRouter } from 'next/navigation'
+import { Button } from '@nextui-org/react'
+
 import loginService from './services/login'
 import registerService from './services/register'
-import { Button } from '@nextui-org/button'
-import { useRouter } from 'next/navigation'
+
+import { title, subtitle } from '@/components/primitives'
 
 export default function App() {
     const [email, setEmail] = useState('')
@@ -15,6 +17,7 @@ export default function App() {
     const [token, setToken] = useState('')
     const [toggleLogin, setToggleLogin] = useState(true)
     const [toggleOrganization, setToggleOrganization] = useState(false)
+    const [state, setState] = useState(false)
 
     const [regOrganizationName, setRegOrganizationName] = useState('')
     const [regOrganizationEmail, setRegOrganizationEmail] = useState('')
@@ -38,14 +41,17 @@ export default function App() {
 
     useEffect(() => {
         const loggedUserJSON = window.localStorage.getItem('loggedUser')
+
         if (loggedUserJSON) {
             const user = JSON.parse(loggedUserJSON)
+
             setUser(user)
         }
     }, [])
 
     useEffect(() => {
         const token = window.localStorage.getItem('loggedUser')
+
         if (token) {
             setUser('')
         }
@@ -59,6 +65,7 @@ export default function App() {
                 user: email,
                 password,
             })
+
             window.localStorage.setItem('loggedUser', JSON.stringify(response))
             setUser(response)
             router.push('/pages/home')
@@ -91,7 +98,10 @@ export default function App() {
                     codigoPostal: regOrganizationCP,
                     fechaDeCreacion: formattedOrganizationDate,
                 })
+
                 console.log(response)
+
+                alert('Registro Exitoso'), setToggleLogin(true)
             } catch (error) {
                 setError('Wrong credentials')
                 setTimeout(() => {
@@ -111,7 +121,10 @@ export default function App() {
                     password: regContributorPassword,
                     tipoDeUsuario: 'contribuyente',
                 })
+
                 console.log(response)
+
+                alert('Registro Exitoso'), setToggleLogin(true)
             } catch (error) {
                 setError('Wrong credentials')
                 setTimeout(() => {
@@ -137,19 +150,19 @@ export default function App() {
                         <div className="w-full flex flex-col gap-4">
                             <Input
                                 isRequired
-                                type="email"
                                 label="Email"
                                 placeholder="Ingresa tu email"
-                                onChange={(e) => setEmail(e.target.value)}
+                                type="email"
                                 value={email}
+                                onChange={(e) => setEmail(e.target.value)}
                             />
                             <Input
                                 isRequired
-                                type="password"
                                 label="Contraseña"
                                 placeholder="Ingresa tu contraseña"
-                                onChange={(e) => setPassword(e.target.value)}
+                                type="password"
                                 value={password}
+                                onChange={(e) => setPassword(e.target.value)}
                             />
                         </div>
                         <Button className="my-5 mr-5" onClick={handleLogin}>
@@ -168,18 +181,18 @@ export default function App() {
                             Por favor, regístrate.
                         </div>
                         <Button
+                            className="my-5 mr-5 min-w-40"
                             color="primary"
                             variant={toggleOrganization ? 'ghost' : 'solid'}
-                            className="my-5 mr-5 min-w-40"
                             onClick={() => setToggleOrganization(false)}
                         >
                             CONTRIBUYENTE
                         </Button>
 
                         <Button
+                            className="my-5 mr-5  min-w-40"
                             color="primary"
                             variant={toggleOrganization ? 'solid' : 'ghost'}
-                            className="my-5 mr-5  min-w-40"
                             onClick={() => setToggleOrganization(true)}
                         >
                             ORGANIZACIÓN
@@ -189,183 +202,183 @@ export default function App() {
                                 <>
                                     <Input
                                         isRequired
-                                        type="email"
                                         label="Email"
                                         placeholder="Ingresa tu email"
+                                        type="email"
+                                        value={regOrganizationEmail}
                                         onChange={(e) =>
                                             setRegOrganizationEmail(
                                                 e.target.value
                                             )
                                         }
-                                        value={regOrganizationEmail}
                                     />
 
                                     <Input
                                         isRequired
-                                        type="text"
                                         label="Nombre de la organización"
                                         placeholder="Ingresa el nombre de la organización"
+                                        type="text"
+                                        value={regOrganizationName}
                                         onChange={(e) =>
                                             setRegOrganizationName(
                                                 e.target.value
                                             )
                                         }
-                                        value={regOrganizationName}
-                                    ></Input>
+                                    />
 
                                     <Input
                                         isRequired
-                                        type="password"
                                         label="Contraseña"
                                         placeholder="Ingresa tu contraseña"
+                                        type="password"
+                                        value={regOrganizationPassword}
                                         onChange={(e) =>
                                             setRegOrganizationPassword(
                                                 e.target.value
                                             )
                                         }
-                                        value={regOrganizationPassword}
                                     />
 
                                     <Input
                                         isRequired
-                                        type="text"
                                         label="Descripción"
                                         placeholder="Ingresa la descripción"
+                                        type="text"
+                                        value={regOrganizationDescription}
                                         onChange={(e) =>
                                             setRegOrganizationDescription(
                                                 e.target.value
                                             )
                                         }
-                                        value={regOrganizationDescription}
                                     />
                                     <Input
                                         isRequired
-                                        type="text"
                                         label="CUIT"
                                         placeholder="Ingresa el CUIT"
+                                        type="text"
+                                        value={regOrganizationCUIT}
                                         onChange={(e) =>
                                             setRegOrganizationCUIT(
                                                 e.target.value
                                             )
                                         }
-                                        value={regOrganizationCUIT}
                                     />
                                     <Input
                                         isRequired
-                                        type="text"
                                         label="Localidad"
                                         placeholder="Ingresa la localidad"
+                                        type="text"
+                                        value={regOrganizationLocality}
                                         onChange={(e) =>
                                             setRegOrganizationLocality(
                                                 e.target.value
                                             )
                                         }
-                                        value={regOrganizationLocality}
                                     />
                                     <Input
                                         isRequired
-                                        type="text"
                                         label="Código Postal"
                                         placeholder="Ingresa el código postal"
+                                        type="text"
+                                        value={regOrganizationCP}
                                         onChange={(e) =>
                                             setRegOrganizationCP(e.target.value)
                                         }
-                                        value={regOrganizationCP}
                                     />
                                     <Input
                                         isRequired
-                                        type="text"
                                         label="Provincia"
                                         placeholder="Ingresa la provincia"
+                                        type="text"
+                                        value={regOrganizationProvince}
                                         onChange={(e) =>
                                             setRegOrganizationProvince(
                                                 e.target.value
                                             )
                                         }
-                                        value={regOrganizationProvince}
                                     />
 
                                     <Input
                                         isRequired
-                                        type="date"
                                         label="Fecha de creación"
                                         placeholder="Ingresa la fecha de creación de tu organización"
+                                        type="date"
+                                        value={regOrganizationCreationDate}
                                         onChange={(e) =>
                                             setRegOrganizationCreationDate(
                                                 e.target.value
                                             )
                                         }
-                                        value={regOrganizationCreationDate}
                                     />
                                 </>
                             ) : (
                                 <>
                                     <Input
                                         isRequired
-                                        type="text"
                                         label="Nombre"
                                         placeholder="Ingresa tu nombre"
+                                        type="text"
+                                        value={regContributorName}
                                         onChange={(e) =>
                                             setRegContributorName(
                                                 e.target.value
                                             )
                                         }
-                                        value={regContributorName}
                                     />
                                     <Input
                                         isRequired
-                                        type="text"
                                         label="Apellido"
                                         placeholder="Ingresa tu apellido"
+                                        type="text"
+                                        value={regContributorLastname}
                                         onChange={(e) =>
                                             setRegContributorLastname(
                                                 e.target.value
                                             )
                                         }
-                                        value={regContributorLastname}
                                     />
                                     <Input
                                         isRequired
-                                        type="date"
                                         label="Fecha de nacimiento"
                                         placeholder="Ingresa tu fecha de nacimiento"
+                                        type="date"
+                                        value={regContributorBirthdate}
                                         onChange={(e) =>
                                             setRegContributorBirthdate(
                                                 e.target.value
                                             )
                                         }
-                                        value={regContributorBirthdate}
                                     />
                                     <Input
                                         isRequired
-                                        type="email"
                                         label="Email"
                                         placeholder="Ingresa tu email"
+                                        type="email"
+                                        value={regContributorEmail}
                                         onChange={(e) =>
                                             setRegContributorEmail(
                                                 e.target.value
                                             )
                                         }
-                                        value={regContributorEmail}
                                     />
                                     <Input
                                         isRequired
-                                        type="password"
                                         label="Contraseña"
                                         placeholder="Ingresa tu contraseña"
+                                        type="password"
+                                        value={regContributorPassword}
                                         onChange={(e) =>
                                             setRegContributorPassword(
                                                 e.target.value
                                             )
                                         }
-                                        value={regContributorPassword}
                                     />
                                 </>
                             )}
                         </div>
                         <Button
-                            color="primary"
                             className="my-5 mr-5"
+                            color="primary"
                             onClick={handleRegister}
                         >
                             Registrarse
