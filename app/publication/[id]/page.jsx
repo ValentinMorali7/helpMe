@@ -12,12 +12,14 @@ import {
     Spinner,
 } from '@nextui-org/react'
 import moment from 'moment'
+import { useRouter } from 'next/navigation'
 
 import { publicationById } from '../../services/publication'
 import ModalMP from '../../../components/modalmp'
 
 const Page = ({ params: { id } }) => {
     const [data, setData] = useState()
+    const router = useRouter()
 
     useEffect(() => {
         async function fetchData() {
@@ -36,16 +38,22 @@ const Page = ({ params: { id } }) => {
         return <Spinner color="warning" label="Cargando..." />
     }
 
+    const handleNavOrgClick = () => {
+        router.push(`/organizacion/${data?.organizacionId}`)
+    }
     return (
         <Card className="w-full h-full">
             <CardHeader className="flex justify-between flex-gap-3 p-5">
-                <Image
-                    alt="nextui logo"
-                    height={40}
-                    radius="sm"
-                    src="https://avatars.githubusercontent.com/u/86160567?s=200&v=4"
-                    width={40}
-                />
+                <a onClick={handleNavOrgClick} className='cursor-pointer'>
+                    <Image
+                        alt="nextui logo"
+                        height={40}
+                        radius="sm"
+                        src="https://avatars.githubusercontent.com/u/86160567?s=200&v=4"
+                        width={40}
+                    />
+                </a>
+                
                 <b>{data?.titulo}</b>
                 <p>{fechaFormateada}</p>
             </CardHeader>
