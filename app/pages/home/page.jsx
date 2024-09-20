@@ -1,5 +1,5 @@
 'use client'
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { Card, CardBody, Spinner } from '@nextui-org/react'
 
 import AboutUs from '../aboutUs/page'
@@ -7,10 +7,13 @@ import AboutUs from '../aboutUs/page'
 import '../home/home.css'
 import { PublicationCard } from '../../../components/publicationcard'
 import { publications } from '../../services/publication'
+import UserContext from '../../UserContext'
 
 const Home = () => {
     const [data, setData] = useState()
 
+    const user = useContext(UserContext)
+    console.log(user)
     useEffect(() => {
         async function fetchData() {
             const result = await publications()

@@ -1,11 +1,12 @@
 'use client'
 import { title, subtitle } from '@/components/primitives'
 import { Input } from '@nextui-org/input'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useContext, createContext } from 'react'
 import loginService from './services/login'
 import registerService from './services/register'
 import { Button } from '@nextui-org/button'
 import { useRouter } from 'next/navigation'
+import { create } from 'domain'
 
 export default function App() {
     const [email, setEmail] = useState('')
@@ -50,6 +51,25 @@ export default function App() {
             setUser('')
         }
     }, [token])
+
+    // const handleLogin = async (e) => {
+    //     e.preventDefault()
+
+    //     try {
+    //         const response = await loginService.login({
+    //             user: email,
+    //             password,
+    //         })
+    //         window.localStorage.setItem('loggedUser', JSON.stringify(response))
+    //         setUser(response)
+    //         router.push('/pages/home')
+    //     } catch (error) {
+    //         setError('Wrong credentials')
+    //         setTimeout(() => {
+    //             setError('')
+    //         }, 5000)
+    //     }
+    // }
 
     const handleLogin = async (e) => {
         e.preventDefault()

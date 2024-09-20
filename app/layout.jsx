@@ -8,7 +8,7 @@ import { siteConfig } from '@/config/site'
 import { fontSans } from '@/config/fonts'
 import { Navbar } from '@/components/navbar'
 
-export const metadata: Metadata = {
+export const metadata = {
     title: {
         default: siteConfig.name,
         template: `%s - ${siteConfig.name}`,
@@ -19,18 +19,14 @@ export const metadata: Metadata = {
     },
 }
 
-export const viewport: Viewport = {
+export const viewport = {
     themeColor: [
         { media: '(prefers-color-scheme: light)', color: 'white' },
         { media: '(prefers-color-scheme: dark)', color: 'black' },
     ],
 }
 
-export default function RootLayout({
-    children,
-}: {
-    children: React.ReactNode
-}) {
+export default function RootLayout({ children }) {
     return (
         <html suppressHydrationWarning lang="en">
             <head />
@@ -49,8 +45,11 @@ export default function RootLayout({
                             {children}
                         </main>
                         <footer className="w-full flex items-center justify-center py-3">
-                            <span className="text-default-600">Somos</span>
-                            <p className="text-primary">HelpMe!</p>
+                            <span className="text-default-600">
+                                Somos&nbsp;
+                            </span>
+
+                            <p className="text-primary"> HelpMe!</p>
                         </footer>
                     </div>
                 </Providers>
