@@ -71,8 +71,12 @@ export default function App() {
     const handleRegister = async (e) => {
         e.preventDefault()
         console.log('hola')
+
         if (toggleOrganization) {
             try {
+                const formattedOrganizationDate = new Date(
+                    regOrganizationCreationDate
+                ).toISOString()
                 const response = await registerService.register({
                     user: regOrganizationEmail,
                     nombreOrganizacion: regOrganizationName,
@@ -83,7 +87,7 @@ export default function App() {
                     localidad: regOrganizationLocality,
                     provincia: regOrganizationProvince,
                     codigoPostal: regOrganizationCP,
-                    // fechaDeCreacion: regOrganizationCreationDate,
+                    fechaDeCreacion: formattedOrganizationDate,
                 })
                 console.log(response)
             } catch (error) {
@@ -94,10 +98,13 @@ export default function App() {
             }
         } else {
             try {
+                const formattedContributorDate = new Date(
+                    regContributorBirthdate
+                ).toISOString()
                 const response = await registerService.register({
                     nombre: regContributorName,
                     apellido: regContributorLastname,
-                    // fechaNacimiento: regContributorBirthdate,
+                    fechaNacimiento: formattedContributorDate,
                     user: regContributorEmail,
                     password: regContributorPassword,
                     tipoDeUsuario: 'contribuyente',
