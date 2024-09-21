@@ -1,8 +1,8 @@
 'use client'
 import { Input } from '@nextui-org/input'
 import { useEffect, useState } from 'react'
-import { Button } from '@nextui-org/button'
 import { useRouter } from 'next/navigation'
+import { Button } from '@nextui-org/react'
 
 import loginService from './services/login'
 import registerService from './services/register'
@@ -18,6 +18,7 @@ export default function App() {
     const [token, setToken] = useState('')
     const [toggleLogin, setToggleLogin] = useState(true)
     const [toggleOrganization, setToggleOrganization] = useState(false)
+    const [state, setState] = useState(false)
 
     const [regOrganizationName, setRegOrganizationName] = useState('')
     const [regOrganizationEmail, setRegOrganizationEmail] = useState('')
@@ -101,6 +102,8 @@ export default function App() {
                 })
 
                 console.log(response)
+
+                alert('Registro Exitoso'), setToggleLogin(true)
             } catch (error) {
                 setError('Wrong credentials')
                 setTimeout(() => {
