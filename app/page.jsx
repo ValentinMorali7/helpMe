@@ -1,15 +1,17 @@
 'use client'
 import { Input } from '@nextui-org/input'
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { Button } from '@nextui-org/react'
 
 import loginService from './services/login'
 import registerService from './services/register'
+import UserContext from './UserContext'
 
 import { title, subtitle } from '@/components/primitives'
 
 export default function App() {
+    const usuarioContext = useContext(UserContext)
     const [isLoading, setIsLoading] = useState(false)
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -69,6 +71,7 @@ export default function App() {
 
             window.localStorage.setItem('loggedUser', JSON.stringify(response))
             setUser(response)
+
             router.push('/pages/home')
         } catch (error) {
             setError('Wrong credentials')

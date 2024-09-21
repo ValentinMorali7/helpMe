@@ -6,10 +6,10 @@ import {
     CardBody,
     CardFooter,
     Divider,
-    Image,
     Button,
     useDisclosure,
     Spinner,
+    Avatar,
 } from '@nextui-org/react'
 import moment from 'moment'
 import { useRouter } from 'next/navigation'
@@ -41,16 +41,15 @@ const Page = ({ params: { id } }) => {
         router.push(`/organizacion/${data?.organizacionId}`)
     }
 
+    console.log({ data })
+
     return (
         <Card className="w-full h-full">
             <CardHeader className="flex justify-between flex-gap-3 p-5">
                 <a className="cursor-pointer" onClick={handleNavOrgClick}>
-                    <Image
-                        alt="nextui logo"
-                        height={40}
-                        radius="sm"
+                    <Avatar
+                        size="lg"
                         src="https://avatars.githubusercontent.com/u/86160567?s=200&v=4"
-                        width={40}
                     />
                 </a>
 
