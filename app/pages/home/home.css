@@ -4,3 +4,13 @@
     justify-content: space-around;
     align-items: flex-start;
 }
+
+/* .cardListContainer {
+    width: 100%;
+    margin: 0 auto;
+    display: grid;
+    grid-gap: 20px;
+    text-align: center;
+    margin-top: 1rem;
+    grid-template-columns: repeat(3, 1fr);
+} */

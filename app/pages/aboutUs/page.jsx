@@ -4,7 +4,7 @@ import './aboutUs.module.css'
 
 const AboutUs = () => {
     return (
-        <div className="container">
+        <div>
             <ul className="aboutUsList">
                 <li className="title">
                     <strong>¿Qué es "HelpMe!"?</strong>
