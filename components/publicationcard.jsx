@@ -1,15 +1,15 @@
 'use client'
 import React from 'react'
 import {
+    Image,
     Card,
     CardBody,
     CardFooter,
-    Image,
-    Button,
     Divider,
+    CardHeader,
+    Link,
 } from '@nextui-org/react'
 import '../components/cardstyles.css'
-import { useRouter } from 'next/navigation'
 
 const TruncatedText = ({ text, maxLength }) => {
     const truncated =
@@ -19,34 +19,29 @@ const TruncatedText = ({ text, maxLength }) => {
 }
 
 export const PublicationCard = ({ prop }) => {
-    const router = useRouter()
-    const handleClick = () => {
-        router.push(`/publication/${prop?.id}`)
-    }
-
     return (
-        <div className="cardContainer">
-            <Card key={prop.id} shadow="sm">
-                <CardBody className="card">
+        <Card key={prop.id} className="py-4 mt-4 h-[350px] w-[250]">
+            <CardHeader className="pb-0 pt-2 px-4 flex-col">
+                <Link href={`/publication/${prop?.id}`}>
                     <Image
                         className="w-full object-cover h-[140px]"
                         radius="lg"
-                        shadow="sm"
                         src="https://nextui-docs-v2.vercel.app/images/hero-card-complete.jpeg"
-                        width="100%"
                     />
-                    <CardFooter className="footer">
-                        <b>{prop.titulo}</b>
-                        <Divider />
-                        <TruncatedText maxLength={100} text={prop.contenido} />
-                    </CardFooter>
-                </CardBody>
-                <div className="buttonCard">
-                    <Button color="primary" onClick={handleClick}>
-                        Ver Más
-                    </Button>
+                </Link>
+                <Divider />
+                <b>{prop.titulo}</b>
+            </CardHeader>
+            <CardBody className="px-3 py-0 text-small text-default-700 m-3">
+                <TruncatedText maxLength={80} text={prop.contenido} />
+            </CardBody>
+            <CardFooter className="grid justify-items-center">
+                <div>
+                    <Link color="primary" href={`/publication/${prop?.id}`}>
+                        Ver Mas..
+                    </Link>
                 </div>
-            </Card>
-        </div>
+            </CardFooter>
+        </Card>
     )
 }

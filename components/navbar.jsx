@@ -1,4 +1,5 @@
 'use client'
+import { useContext, useEffect, useState } from 'react'
 import {
     Navbar as NextUINavbar,
     NavbarContent,
@@ -7,8 +8,9 @@ import {
 } from '@nextui-org/navbar'
 import { Link } from '@nextui-org/link'
 import { Button } from '@nextui-org/button'
-import { useState } from 'react'
 import { useRouter } from 'next/navigation'
+
+import UserContext from '../app/UserContext'
 
 import {
     AboutUsLogo,
@@ -18,12 +20,38 @@ import {
 } from '@/components/styledIcons'
 
 export const Navbar = () => {
-    const [token, setToken] = useState('')
+    const { user, setUser } = useContext(UserContext)
+    const [loading, setLoading] = useState(true) // Estado de carga
     const router = useRouter()
     const handleLogout = () => {
         window.localStorage.removeItem('loggedUser')
         window.location.reload()
         router.push('pages/profile')
+    }
+
+    useEffect(() => {
+        if (user === null) {
+            const loggedUserJSON = window.localStorage.getItem('loggedUser')
+
+            if (loggedUserJSON) {
+                const user = JSON.parse(loggedUserJSON)
+
+                setUser(user)
+            } else {
+                router.push('/') // Si no hay usuario, redirige
+            }
+        }
+        setLoading(false) // Indica que la carga ha finalizado
+    }, [user, setUser, router])
+
+    if (loading) {
+        return <p>Cargando...</p> // Muestra un indicador de carga mientras se obtiene el usuario
+    }
+
+    if (!user || !user.token) {
+        router.push('/')
+
+        return null
     }
 
     return (
@@ -61,8 +89,7 @@ export const Navbar = () => {
                     </Link>
                     {/* <ThemeSwitch /> */}
                 </NavbarItem>
-
-                {token && (
+                {
                     <NavbarItem className="hidden md:flex">
                         <Button
                             as={Link}
@@ -74,7 +101,7 @@ export const Navbar = () => {
                             CERRAR SESIÓN
                         </Button>
                     </NavbarItem>
-                )}
+                }
             </NavbarContent>
         </NextUINavbar>
     )

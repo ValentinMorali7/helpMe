@@ -14,4 +14,10 @@ export const publicationById = async (id) => {
     return data
 }
 
-export default { publications, publicationById }
+export const crearPublication = async (dataBody) => {
+    const { data } = await axios.post(baseUrl + `publicacion`, dataBody)
+
+    return data
+}
+
+export default { publications, publicationById, crearPublication }

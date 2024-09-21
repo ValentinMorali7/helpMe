@@ -1,8 +1,8 @@
 'use client'
 import { Input } from '@nextui-org/input'
+import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { Button } from '@nextui-org/react'
-import { useEffect, useState } from 'react'
 
 import loginService from './services/login'
 import registerService from './services/register'
@@ -10,6 +10,7 @@ import registerService from './services/register'
 import { title, subtitle } from '@/components/primitives'
 
 export default function App() {
+    const [isLoading, setIsLoading] = useState(false)
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [user, setUser] = useState('')
@@ -57,28 +58,9 @@ export default function App() {
         }
     }, [token])
 
-    // const handleLogin = async (e) => {
-    //     e.preventDefault()
-
-    //     try {
-    //         const response = await loginService.login({
-    //             user: email,
-    //             password,
-    //         })
-    //         window.localStorage.setItem('loggedUser', JSON.stringify(response))
-    //         setUser(response)
-    //         router.push('/pages/home')
-    //     } catch (error) {
-    //         setError('Wrong credentials')
-    //         setTimeout(() => {
-    //             setError('')
-    //         }, 5000)
-    //     }
-    // }
-
     const handleLogin = async (e) => {
         e.preventDefault()
-
+        setIsLoading(true)
         try {
             const response = await loginService.login({
                 user: email,
@@ -90,6 +72,7 @@ export default function App() {
             router.push('/pages/home')
         } catch (error) {
             setError('Wrong credentials')
+            setIsLoading(false)
             setTimeout(() => {
                 setError('')
             }, 5000)
@@ -98,7 +81,7 @@ export default function App() {
 
     const handleRegister = async (e) => {
         e.preventDefault()
-        console.log('hola')
+        setIsLoading(true)
 
         if (toggleOrganization) {
             try {
@@ -141,10 +124,9 @@ export default function App() {
                     tipoDeUsuario: 'contribuyente',
                 })
 
-                console.log(response)
-
-                alert('Registro Exitoso'), setToggleLogin(true)
+                router.push('/pages/home')
             } catch (error) {
+                setIsLoading(false)
                 setError('Wrong credentials')
                 setTimeout(() => {
                     setError('')
@@ -184,7 +166,11 @@ export default function App() {
                                 onChange={(e) => setPassword(e.target.value)}
                             />
                         </div>
-                        <Button className="my-5 mr-5" onClick={handleLogin}>
+                        <Button
+                            className="my-5 mr-5"
+                            isLoading={isLoading}
+                            onClick={handleLogin}
+                        >
                             Iniciar sesión
                         </Button>
                         <a

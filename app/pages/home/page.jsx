@@ -13,7 +13,7 @@ const Home = () => {
     const [data, setData] = useState()
 
     const user = useContext(UserContext)
-    console.log(user)
+
     useEffect(() => {
         async function fetchData() {
             const result = await publications()
@@ -22,9 +22,10 @@ const Home = () => {
         }
         fetchData()
     }, [])
-    if (!data) {
-        return <Spinner color="warning" label="Cargando..." />
-    }
+
+    // if (!data) {
+    //     return
+    // }
 
     return (
         <>
@@ -36,12 +37,17 @@ const Home = () => {
                         </CardBody>
                     </Card>
                 </div>
-                <div className="container">
-                    {data &&
-                        data.map((lists, index) => (
+                {data ? (
+                    <div className="grid grid-cols-2 gap-5 md:grid-cols-4">
+                        {data.map((lists, index) => (
                             <PublicationCard key={index} prop={lists} />
                         ))}
-                </div>
+                    </div>
+                ) : (
+                    <div className="grid justify-items-center mt-20">
+                        <Spinner color="warning" label="Cargando..." />
+                    </div>
+                )}
             </div>
         </>
     )
