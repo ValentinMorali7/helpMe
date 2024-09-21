@@ -23,10 +23,16 @@ export const Navbar = () => {
     const { user, setUser } = useContext(UserContext)
     const [loading, setLoading] = useState(true) // Estado de carga
     const router = useRouter()
+    const dataUser = JSON.parse(window.localStorage.getItem('loggedUser'))
+
     const handleLogout = () => {
         window.localStorage.removeItem('loggedUser')
         window.location.reload()
         router.push('pages/profile')
+    }
+
+    const handleCrearPublicacion = () => {
+        router.push('pages/publicacion')
     }
 
     useEffect(() => {
@@ -78,6 +84,16 @@ export const Navbar = () => {
                 justify="end"
             >
                 <NavbarItem className="hidden sm:flex gap-2">
+                    {dataUser.usuario.tipoDeUsuario === 'organizacion' && (
+                        <Button
+                            as={Link}
+                            className="text-sm font-normal text-default-600 bg-default-100"
+                            variant="flat"
+                            onClick={handleCrearPublicacion}
+                        >
+                            Crear Nueva Publicacion
+                        </Button>
+                    )}
                     <Link aria-label="Twitter" href="/pages/aboutUs">
                         <AboutUsLogo className="text-default-500" />
                     </Link>
