@@ -1,5 +1,5 @@
 'use client'
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useState, useEffect, useContext, use } from 'react'
 import { Card, CardBody, Spinner } from '@nextui-org/react'
 
 import AboutUs from '../aboutUs/page'
@@ -8,13 +8,18 @@ import '../home/home.css'
 import { PublicationCard } from '../../../components/publicationcard'
 import { publications } from '../../services/publication'
 import UserContext from '../../UserContext'
+import NavbarContext from '../../NavbarContext'
 
 const Home = () => {
     const [data, setData] = useState()
 
     const user = useContext(UserContext)
+    const { navbar, setNavbar } = useContext(NavbarContext)
+    console.log('navbar en home', navbar)
 
     useEffect(() => {
+        setNavbar(true)
+
         async function fetchData() {
             const result = await publications()
 
@@ -22,10 +27,6 @@ const Home = () => {
         }
         fetchData()
     }, [])
-
-    // if (!data) {
-    //     return
-    // }
 
     return (
         <>
