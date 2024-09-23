@@ -14,7 +14,6 @@ import UserContext from '../app/UserContext'
 import NavbarContext from '../app/NavbarContext'
 
 import {
-    AboutUsLogo,
     ContactUsLogo,
     ProfileLogo,
     LogoutLogo,
@@ -33,7 +32,7 @@ export const Navbar = () => {
     }
 
     const handleCrearPublicacion = () => {
-        router.push('pages/publicacion')
+        router.push('publicacion')
     }
 
     useEffect(() => {
@@ -99,9 +98,7 @@ export const Navbar = () => {
                                 Crear Nueva Publicacion
                             </Button>
                         )}
-                        <Link aria-label="Twitter" href="/pages/aboutUs">
-                            <AboutUsLogo className="text-default-500" />
-                        </Link>
+
                         <Link aria-label="Discord" href="/pages/profile">
                             <ProfileLogo className="text-default-500" />
                         </Link>
