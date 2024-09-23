@@ -1,5 +1,5 @@
 'use client'
-import React, { useState, useEffect, useContext, use } from 'react'
+import React, { useState, useEffect, useContext, Suspense } from 'react'
 import { Card, CardBody, Spinner, Pagination } from '@nextui-org/react'
 
 import AboutUs from '../aboutUs/page'
@@ -29,7 +29,7 @@ const Home = () => {
     }, [])
 
     return (
-        <>
+        <Suspense>
             <div className="body">
                 <div>
                     <Card>
@@ -57,7 +57,7 @@ const Home = () => {
                     </div>
                 )}
             </div>
-        </>
+        </Suspense>
     )
 }
 

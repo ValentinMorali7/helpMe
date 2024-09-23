@@ -1,7 +1,7 @@
 import '@/styles/globals.css'
 import { Metadata, Viewport } from 'next'
 import clsx from 'clsx'
-
+import { Suspense } from 'react'
 import { Providers } from './providers'
 
 import { siteConfig } from '@/config/site'
@@ -39,19 +39,21 @@ export default function RootLayout({ children }) {
                 <Providers
                     themeProps={{ attribute: 'class', defaultTheme: 'light' }}
                 >
-                    <div className="relative flex flex-col h-screen">
-                        <Navbar />
-                        <main className="container mx-auto max-w-7xl pt-16 px-6 flex-grow">
-                            {children}
-                        </main>
-                        <footer className="w-full flex items-center justify-center py-3">
-                            <span className="text-default-600">
-                                Somos&nbsp;
-                            </span>
+                    <Suspense>
+                        <div className="relative flex flex-col h-screen">
+                            <Navbar />
+                            <main className="container mx-auto max-w-7xl pt-16 px-6 flex-grow">
+                                {children}
+                            </main>
+                            <footer className="w-full flex items-center justify-center py-3">
+                                <span className="text-default-600">
+                                    Somos&nbsp;
+                                </span>
 
-                            <p className="text-primary"> HelpMe!</p>
-                        </footer>
-                    </div>
+                                <p className="text-primary"> HelpMe!</p>
+                            </footer>
+                        </div>
+                    </Suspense>
                 </Providers>
             </body>
         </html>

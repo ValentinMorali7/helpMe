@@ -1,5 +1,7 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 'use client'
-import { useContext, useState } from 'react'
+import { useContext, useState, Suspense } from 'react'
 import { useRouter } from 'next/navigation'
 import { Input } from '@nextui-org/input'
 import { Button } from '@nextui-org/button'

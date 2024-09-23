@@ -1,3 +1,6 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+
 'use client'
 import { useState } from 'react'
 import { Input } from '@nextui-org/input'

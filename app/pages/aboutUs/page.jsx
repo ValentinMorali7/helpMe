@@ -7,7 +7,7 @@ const AboutUs = () => {
         <div>
             <ul>
                 <li className="text-center text-blue-500">
-                    <strong>¿Qué es "HelpMe!"?</strong>
+                    <strong>¿Qué es HelpMe!?</strong>
                 </li>
                 <li className="text-center mt-1">
                     HelpMe! es un espacio para brindar ayuda de manera rápida y

@@ -1,6 +1,6 @@
 'use client'
 import { Button } from '@nextui-org/button'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, Suspense } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { useContext } from 'react'
 
