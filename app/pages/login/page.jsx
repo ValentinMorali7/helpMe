@@ -1,11 +1,13 @@
 'use client'
-import { useContext, useEffect, useState } from 'react'
-import UserContext from '../../UserContext'
+import { useContext, useState } from 'react'
 import { useRouter } from 'next/navigation'
-import loginService from '../../services/login'
-import { title, subtitle } from '@/components/primitives'
 import { Input } from '@nextui-org/input'
 import { Button } from '@nextui-org/button'
+
+import UserContext from '../../UserContext'
+import loginService from '../../services/login'
+
+import { title, subtitle } from '@/components/primitives'
 
 const LoginPage = () => {
     const { user, setUser } = useContext(UserContext)
@@ -91,9 +93,9 @@ const LoginPage = () => {
                         </a>
                     </>
                 )}
-                )
             </div>
         </section>
     )
 }
+
 export default LoginPage

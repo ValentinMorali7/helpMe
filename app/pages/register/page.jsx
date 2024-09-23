@@ -1,10 +1,12 @@
 'use client'
 import { useState } from 'react'
-import { title, subtitle } from '@/components/primitives'
 import { Input } from '@nextui-org/input'
 import { Button } from '@nextui-org/button'
-import registerService from '../../services/register'
 import { useRouter } from 'next/navigation'
+
+import registerService from '../../services/register'
+
+import { title, subtitle } from '@/components/primitives'
 
 const RegisterPage = () => {
     const router = useRouter()
@@ -31,6 +33,7 @@ const RegisterPage = () => {
 
     const handleChange = (e) => {
         const { name, value } = e.target
+
         setFormState((prevState) => ({
             ...prevState,
             [name]: value,
@@ -162,7 +165,7 @@ const RegisterPage = () => {
                                     placeholder="Ingresa tu email"
                                     type="email"
                                     value={formState.regOrganizationEmail}
-                                    onChange={(e) => console.log(e)}
+                                    onChange={handleChange}
                                 />
 
                                 <Input
@@ -296,12 +299,12 @@ const RegisterPage = () => {
                     <Button
                         className="my-5 mr-5"
                         color="primary"
-                        isLoading={isLoading}
                         isDisabled={
                             toggleOrganization
                                 ? !organizationValidation
                                 : !contributorValidation
                         }
+                        isLoading={isLoading}
                         onClick={handleRegister}
                     >
                         Registrarse
@@ -317,4 +320,5 @@ const RegisterPage = () => {
         </section>
     )
 }
+
 export default RegisterPage

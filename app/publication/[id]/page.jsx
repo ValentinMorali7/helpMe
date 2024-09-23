@@ -12,14 +12,16 @@ import {
     Avatar,
 } from '@nextui-org/react'
 import moment from 'moment'
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 
-import { publicationById } from '../../services/publication'
+import { actualizarDonacion, publicationById } from '../../services/publication'
 import ModalMP from '../../../components/modalmp'
 
 const Page = ({ params: { id } }) => {
     const [data, setData] = useState()
     const router = useRouter()
+    const searchParams = useSearchParams()
+    const donadorID = searchParams.get('donadorID') // Extraer el código de MercadoPago
 
     useEffect(() => {
         async function fetchData() {
@@ -29,6 +31,16 @@ const Page = ({ params: { id } }) => {
         }
         fetchData()
     }, [])
+
+    useEffect(() => {
+        if (donadorID) {
+            try {
+                actualizarDonacion(donadorID)
+            } catch (e) {
+                console.error(e)
+            }
+        }
+    }, [donadorID])
 
     const fechaFormateada = moment(data?.fechaCreacion).format('DD/MM/YYYY')
     const { isOpen, onOpen, onClose } = useDisclosure()
@@ -65,11 +77,7 @@ const Page = ({ params: { id } }) => {
                 <Button color="primary" onClick={onOpen}>
                     DONAR !
                 </Button>
-                <ModalMP
-                    body={data?.descripcionDonacion}
-                    isOpen={isOpen}
-                    onClose={onClose}
-                />
+                <ModalMP isOpen={isOpen} publicacion={data} onClose={onClose} />
             </CardFooter>
         </Card>
     )
