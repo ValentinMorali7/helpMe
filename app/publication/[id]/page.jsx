@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 'use client'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import {
     Card,
     CardHeader,
@@ -20,10 +20,12 @@ import { donadoresByIDPublicacion } from '../../services/publication'
 import DonatorCard from '../../../components/donators-cards'
 import { actualizarDonacion, publicationById } from '../../services/publication'
 import ModalMP from '../../../components/modalmp'
+import UserContext from '@/app/UserContext'
 
 const Page = ({ params: { id } }) => {
     const [data, setData] = useState()
     const [donadores, setDonadores] = useState()
+    const {user, setUser} = useContext(UserContext);
     const router = useRouter()
     const searchParams = useSearchParams()
     const donadorID = searchParams.get('donadorID') // Extraer el código de MercadoPago
@@ -66,7 +68,6 @@ const Page = ({ params: { id } }) => {
     const handleNavOrgClick = () => {
         router.push(`/organizacion/${data?.organizacionId}`)
     }
-
     return (
         <>
             <Card className="w-600 h-1000">
@@ -87,7 +88,7 @@ const Page = ({ params: { id } }) => {
                 </CardBody>
                 <Divider />
                 <CardFooter>
-                    <Button color="primary" onClick={onOpen}>
+                    <Button color="primary" onClick={onOpen} isDisabled={user.usuario.tipoDeUsuario === "organizacion"}>
                         DONAR !
                     </Button>
                     <ModalMP
