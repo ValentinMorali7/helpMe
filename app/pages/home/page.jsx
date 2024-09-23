@@ -45,11 +45,14 @@ const Home = () => {
                                 <PublicationCard key={index} prop={lists} />
                             ))}
                         </div>
-                        <Pagination
-                            className="mt-4 place-self-center"
-                            initialPage={1}
-                            totalPages={10}
-                        ></Pagination>
+                        <div className="flex justify-center">
+                            <Pagination
+                                className="mt-4 place-self-center"
+                                initialPage={1}
+                                total={10}
+                                isDisabled={true}
+                            ></Pagination>
+                        </div>
                     </>
                 ) : (
                     <div className="grid justify-items-center mt-20">
