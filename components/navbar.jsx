@@ -99,9 +99,7 @@ export const Navbar = () => {
                                 Crear Nueva Publicacion
                             </Button>
                         )}
-                        <Link aria-label="Twitter" href="/pages/aboutUs">
-                            <AboutUsLogo className="text-default-500" />
-                        </Link>
+
                         <Link aria-label="Discord" href="/pages/profile">
                             <ProfileLogo className="text-default-500" />
                         </Link>
