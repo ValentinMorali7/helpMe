@@ -1,3 +1,4 @@
+'use client'
 import React from 'react'
 import {
     FacebookLogo,
@@ -5,11 +6,17 @@ import {
     TwitterLogo,
 } from '../../../components/styledIcons'
 import { title } from '../../../components/primitives'
+import { Button } from '@nextui-org/button'
 
 // asd
 const ContactUs = () => {
+    const handleBorrar = () => {
+        window.localStorage.removeItem('loggedUser')
+        window.location.reload()
+    }
     return (
         <>
+            <Button onClick={handleBorrar}>Borrar tooken</Button>
             <div className="flex flex-row justify-center ">
                 <span className={title()}>Somos&nbsp;</span>
                 <span className={title({ color: 'blue' })}>HelpMe!&nbsp;</span>
