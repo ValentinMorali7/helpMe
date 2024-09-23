@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { Input } from '@nextui-org/input'
 import { Button } from '@nextui-org/button'
 import { useRouter } from 'next/navigation'
+import { Popover, PopoverTrigger, PopoverContent } from '@nextui-org/popover'
 
 import registerService from '../../services/register'
 
@@ -30,6 +31,10 @@ const RegisterPage = () => {
     })
 
     const [toggleOrganization, setToggleOrganization] = useState(false)
+
+    const [showPopover, setShowPopover] = useState(false)
+    const [colorPopover, setColorPopover] = useState('')
+    const [messagePopover, setMessagePopover] = useState('')
 
     const handleChange = (e) => {
         const { name, value } = e.target
@@ -61,15 +66,26 @@ const RegisterPage = () => {
                     codigoPostal: formState.regOrganizationCP,
                     fechaDeCreacion: formattedOrganizationDate,
                 })
-
                 console.log(response)
+                setShowPopover(true)
+                setColorPopover('success')
+                setMessagePopover('Registro con éxito!')
+                setTimeout(() => {
+                    setShowPopover(false)
+                }, 3000)
 
-                alert('Registro Exitoso')
+                router.push('/login')
             } catch (error) {
                 setError('Wrong credentials')
                 setTimeout(() => {
                     setError('')
                 }, 5000)
+                setShowPopover(true)
+                setColorPopover('danger')
+                setMessagePopover('Registro fallido!')
+                setTimeout(() => {
+                    setShowPopover(false)
+                }, 3000)
             }
         } else {
             try {
@@ -84,12 +100,27 @@ const RegisterPage = () => {
                     password: formState.regContributorPassword,
                     tipoDeUsuario: 'contribuyente',
                 })
-            } catch (error) {
+                setShowPopover(true)
+                setColorPopover('success')
+                setMessagePopover('Registro con éxito!')
                 setIsLoading(false)
+
+                setTimeout(() => {
+                    setShowPopover(false)
+                    router.push('/login')
+                }, 3000)
+            } catch (error) {
                 setError('Wrong credentials')
+                setIsLoading(false)
                 setTimeout(() => {
                     setError('')
                 }, 5000)
+                setShowPopover(true)
+                setColorPopover('danger')
+                setMessagePopover('Registro fallido!')
+                setTimeout(() => {
+                    setShowPopover(false)
+                }, 3000)
             }
         }
     }
@@ -296,19 +327,35 @@ const RegisterPage = () => {
                             </>
                         )}
                     </div>
-                    <Button
-                        className="my-5 mr-5"
-                        color="primary"
-                        isDisabled={
-                            toggleOrganization
-                                ? !organizationValidation
-                                : !contributorValidation
-                        }
-                        isLoading={isLoading}
-                        onClick={handleRegister}
+                    <Popover
+                        placement="left"
+                        color={colorPopover}
+                        isOpen={showPopover}
                     >
-                        Registrarse
-                    </Button>
+                        <PopoverTrigger>
+                            <Button
+                                className="my-5 mr-5"
+                                color="primary"
+                                isDisabled={
+                                    toggleOrganization
+                                        ? !organizationValidation
+                                        : !contributorValidation
+                                }
+                                isLoading={isLoading}
+                                onClick={handleRegister}
+                            >
+                                Registrarse
+                            </Button>
+                        </PopoverTrigger>
+                        <PopoverContent>
+                            <div className="px-1 py-2">
+                                <div className="text-small font-bold">
+                                    {messagePopover}
+                                </div>
+                            </div>
+                        </PopoverContent>
+                    </Popover>
+
                     <a
                         className="cursor-pointer"
                         onClick={() => router.push('/pages/login')}
