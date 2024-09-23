@@ -30,7 +30,7 @@ export const PublicationCard = ({ prop }) => {
                     />
                 </Link>
                 <Divider />
-                <b>{prop.titulo}</b>
+                <b className="text-center text-blue-500 mt-2">{prop.titulo}</b>
             </CardHeader>
             <CardBody className="px-3 py-0 text-small text-default-700 m-3">
                 <TruncatedText maxLength={80} text={prop.contenido} />
@@ -38,7 +38,7 @@ export const PublicationCard = ({ prop }) => {
             <CardFooter className="grid justify-items-center">
                 <div>
                     <Link color="primary" href={`/publication/${prop?.id}`}>
-                        Ver Mas..
+                        Ver más...
                     </Link>
                 </div>
             </CardFooter>

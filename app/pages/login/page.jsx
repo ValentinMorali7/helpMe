@@ -53,9 +53,7 @@ const LoginPage = () => {
                 <span className={title()}>Somos&nbsp;</span>
                 <span className={title({ color: 'blue' })}>HelpMe!&nbsp;</span>
                 <br />
-                {user ? (
-                    <p>logeado normalmente</p>
-                ) : (
+                {!user && (
                     <>
                         <div className={subtitle({ class: 'mt-4' })}>
                             Por favor, inicia sesión o regístrate.
@@ -93,6 +91,7 @@ const LoginPage = () => {
                         </a>
                     </>
                 )}
+                )
             </div>
         </section>
     )

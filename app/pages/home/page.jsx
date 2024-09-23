@@ -1,6 +1,6 @@
 'use client'
 import React, { useState, useEffect, useContext, use } from 'react'
-import { Card, CardBody, Spinner } from '@nextui-org/react'
+import { Card, CardBody, Spinner, Pagination } from '@nextui-org/react'
 
 import AboutUs from '../aboutUs/page'
 
@@ -39,11 +39,18 @@ const Home = () => {
                     </Card>
                 </div>
                 {data ? (
-                    <div className="grid grid-cols-2 gap-5 md:grid-cols-4">
-                        {data.map((lists, index) => (
-                            <PublicationCard key={index} prop={lists} />
-                        ))}
-                    </div>
+                    <>
+                        <div className="grid grid-cols-2 gap-5 md:grid-cols-4">
+                            {data.map((lists, index) => (
+                                <PublicationCard key={index} prop={lists} />
+                            ))}
+                        </div>
+                        <Pagination
+                            className="mt-4 place-self-center"
+                            initialPage={1}
+                            totalPages={10}
+                        ></Pagination>
+                    </>
                 ) : (
                     <div className="grid justify-items-center mt-20">
                         <Spinner color="warning" label="Cargando..." />
