@@ -26,7 +26,7 @@ export const PublicationCard = ({ prop }) => {
                     <Image
                         className="w-full object-cover h-[140px]"
                         radius="lg"
-                        src="https://nextui-docs-v2.vercel.app/images/hero-card-complete.jpeg"
+                        src="https://cdn.vectorstock.com/i/500p/33/37/peace-dove-vector-1023337.jpg"
                     />
                 </Link>
                 <Divider />
