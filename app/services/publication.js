@@ -66,4 +66,10 @@ export const actualizarDonacion = async (id) => {
     return data
 }
 
+export const donadoresByIDPublicacion = async (id) => {
+    const { data } = await axios.get(baseUrl + `donacion/publicacion/${id}`)
+
+    return data
+}
+
 export default { publications, publicationById, crearPublication }
