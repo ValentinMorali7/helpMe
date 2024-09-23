@@ -1,14 +1,16 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import { Input, Textarea } from '@nextui-org/input'
 import { Button } from '@nextui-org/button'
 import { useRouter } from 'next/navigation'
 
+import { organizacionByIDUSUARIO } from '../app/services/publication'
 import { crearPublication } from '../app/services/publication'
 import UserContext from '../app/UserContext'
 
 function EditorUTN() {
     const [isLoading, setIsLoading] = useState(false)
-    const user = useContext(UserContext)
+    const { user, setUser } = useContext(UserContext)
+    let [loading, setLoading] = useState(true)
     let [data, setData] = useState('')
     const [error, setError] = useState('')
     let [titulo, setTitulo] = useState('Titulo')
@@ -16,10 +18,29 @@ function EditorUTN() {
     let [detalleDonacion, setDetalleDonacion] = useState(
         'CBU / Alias / Informacion de donacion'
     )
-    let [organizacionId, setOrganizacion] = useState(0)
+    let [organizacion, setOrganizacion] = useState(null)
     const router = useRouter()
 
-    // user.setUser('peralta')
+    const fetchOrganizacionById = async () => {
+        try {
+            const response = await organizacionByIDUSUARIO(
+                user?.usuario?.id,
+                user.token
+            )
+
+            setOrganizacion(response)
+        } catch (error) {
+            console.error('Error al obtener la organización:', error)
+        } finally {
+            setLoading(false)
+        }
+    }
+
+    useEffect(() => {
+        if (user && user?.usuario?.id) {
+            fetchOrganizacionById()
+        }
+    }, [user])
 
     const handleOnClick = async () => {
         setIsLoading(true)
@@ -27,16 +48,14 @@ function EditorUTN() {
             const response = await crearPublication({
                 titulo,
                 contenido,
-                organizacionId: 14,
+                organizacionId: organizacion.id,
                 detallePago: detalleDonacion,
             })
 
             router.push(`/publication/${response.id}`)
         } catch (error) {
             //setError('Error al crear una publicacion')
-            setTimeout(() => {
-                //setError('')
-            }, 5000)
+            console.error(error)
         } finally {
             setIsLoading(false) // Termina el loading
         }
@@ -76,7 +95,7 @@ function EditorUTN() {
                 <Button
                     color="primary"
                     disabled={isLoading}
-                    isLoading={isLoading}
+                    isLoading={isLoading || loading}
                     onClick={handleOnClick}
                 >
                     Crear
