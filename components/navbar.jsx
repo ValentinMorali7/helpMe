@@ -14,7 +14,6 @@ import UserContext from '../app/UserContext'
 import NavbarContext from '../app/NavbarContext'
 
 import {
-    AboutUsLogo,
     ContactUsLogo,
     ProfileLogo,
     LogoutLogo,
@@ -33,7 +32,7 @@ export const Navbar = () => {
     }
 
     const handleCrearPublicacion = () => {
-        router.push('pages/publicacion')
+        router.push('publicacion')
     }
 
     useEffect(() => {
