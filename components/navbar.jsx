@@ -23,10 +23,10 @@ export const Navbar = () => {
     const { user, setUser } = useContext(UserContext)
     const [loading, setLoading] = useState(true) // Estado de carga
     const router = useRouter()
-    const dataUser = JSON.parse(window.localStorage.getItem('loggedUser'))
+    const dataUser = JSON.parse(localStorage.getItem('loggedUser'))
 
     const handleLogout = () => {
-        window.localStorage.removeItem('loggedUser')
+        localStorage.removeItem('loggedUser')
         window.location.reload()
         router.push('pages/profile')
     }
